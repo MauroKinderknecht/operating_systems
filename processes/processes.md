@@ -53,7 +53,7 @@ along with their memory and CPU usage.
 
 The output contains the following data for each running process:
 
-```
+```bash
 $ top
 ```
 
@@ -83,7 +83,7 @@ The `ps` command is short for *Process Status*. It displays the
 currently-running processes. However, unlike the top command, the output
 generated is not in real-time.
 
-```
+```bash
 $ ps
 ```
 
@@ -102,7 +102,7 @@ processes instead of just the ones that are running.
 The `jobs` command is used to display a list of background jobs running in the
 current shell session.
 
-```
+```bash
 $ jobs
 ```
 
@@ -113,7 +113,7 @@ $ jobs
 We can use the `fg` and `bg` commands to move processes betweeen background and
 foreground.
 
-```
+```bash
 $ fg [JobID]
 $ bg [JobID]
 ```
@@ -130,7 +130,7 @@ most common one is `kill -9` which is `SIGKILL`.
 
 You can list all available signals using:
 
-```
+```bash
 $ kill -L
 ```
 
@@ -139,12 +139,12 @@ $ kill -L
 The default signal is 15, which is `SIGTERM`
 
 The syntax for killing a process is:
-```
+```bash
 $ kill -[signal] [PID]
 ```
 
 Or you can kill a job:
-```
+```bash
 $ kill -[signal] %[JobID]
 ```
 
@@ -156,13 +156,13 @@ value.
 
 To start a process and give it a nice value other than the default one, use:
 
-```
+```bash
 $ nice -n [value] [process name]
 ```
 
 To change a nice value of a process that is already running use:
 
-```
+```bash
 $ renice [value] -p [PID]
 ```
 
@@ -174,7 +174,7 @@ We want to expose our 500 port to the open internet. For that we can use
 We also want to run the process with a priority of 8, to not display any output
 and to run as a background process so we run the following command:
 
-```
+```bash
 $ nice -n 8 ngrok http 500 > /dev/null &
 ```
 
@@ -187,7 +187,7 @@ Then we realise that we wanted to run our process with a priority of 12.
 
 We can achieve this by getting the PID from the `top` command and running:
 
-```
+```bash
 $ renice 12 -p 1328
 ```
 
@@ -199,7 +199,7 @@ and keeps all the other information the same.
 Finally, we finished our work, so we want to get rid of the process. We can
 force kill it by running
 
-```
+```bash
 $ kill -9 1328
 ```
 
@@ -212,7 +212,7 @@ Running `top` one last time, we varify that our process is no longer running.
 
 Create a bash script that starts the following process in the background with priority 10.
 
-```
+```bash
 echo "self destructing in 10 seconds..." && sleep 10 && echo "you died 💀"
 ```
 
