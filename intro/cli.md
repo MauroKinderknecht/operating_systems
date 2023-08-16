@@ -91,3 +91,107 @@ sleep 0.5h
 ```
 
 Sleeps for half an hour
+
+### File navigation
+
+Linux has a file system we can navigate. Every time you open a new terminal, it
+is started in the root of your user's file system. 
+
+#### Ls command
+
+The `ls` command, list all the child diretories and files in your current directory.
+
+```
+$ ls
+```
+
+#### Cd command
+
+The `cd` command, short for change directory, lets you navigate to a folder or
+directory in your filesystem.
+
+```
+$ cd
+```
+
+Using `cd` with no arguments, you can move back to the root wherever you are.
+
+```
+$ cd <directory>
+```
+
+You can move to a child directory using cd with the name of the directory
+
+```
+$ cd ..
+```
+
+You can move to a parent directory using double dots.
+
+#### Mkdir command
+
+You can create a new subdirectory in the current directory using the `mkdir`
+command.
+
+```
+$ mkdir files
+```
+
+This command creates a new directory `files` in the current directory.
+
+#### Touch command
+
+You can create a new file in the current directory using the `touch` command.
+
+```
+$ touch hello.txt
+```
+
+This command creates a new file `hello.txt` in the current directory.
+
+#### Cat command
+
+You can print the contents of a file using the `cat` command.
+
+```
+$ cat hello.txt
+```
+
+This command prints the contents of the `hello.txt` file in the console.
+
+### Redirection operator
+
+You can use redirection operators `>` to write the output of a command into a 
+file or `>>` to append the output of a command into an existing file.
+
+```
+$ echo "Hello world" > hello.txt
+$ cat hello.txt
+$ echo "Hello again" >> hello.txt
+$ cat hello.txt
+```
+
+### Pipe operator
+
+You can use the pipe `|` to connect the output of a command to the input of
+another command.
+
+```
+echo "Hello world" | cat
+```
+
+### Grep
+
+Grep is a command that searches a file for a particular pattern of characters,
+and displays all lines rthat contain that pattern. That pattern could be a
+literal string or a regular expression.
+
+```
+$ grep "unix" intro/assets/grep.txt 
+$ grep -i "unix" intro/assets/grep.txt 
+$ grep "fun[a-zA-Z]*" intro/assets/grep.txt 
+```
+
+The first command searches for the unix word, the second one searches for the
+same word but case-unsensitive and the last one searches for any word that
+starts with fun.

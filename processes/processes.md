@@ -208,11 +208,13 @@ Running `top` one last time, we varify that our process is no longer running.
 ![ngrok_kill](./assets/ngrok_kill.png)
 
 
-## Exercise
+## Pstree
 
-Create a bash script that starts the following process in the background with priority 10.
+We can see the hierarchy of the processes in our system using the `pstree`
+command.
 
-```bash
-echo "self destructing in 10 seconds..." && sleep 10 && echo "you died 💀"
+```
+$ pstree
 ```
 
+![pstree](./assets/pstree.png)
