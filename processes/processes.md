@@ -218,3 +218,16 @@ $ pstree
 ```
 
 ![pstree](./assets/pstree.png)
+
+## Lsof
+
+We can see what command is running in which port using the `lsof` command.
+
+The `lsof` command with no arguments will list all processes that are 
+running in a port. Is not very useful.
+
+A more useful command is to see which process is running in a specific port
+
+```
+lsof -i :<port>
+```
