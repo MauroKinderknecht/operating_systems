@@ -31,10 +31,14 @@ si presiona cualquier otra tecla no.
 Crear un script que, utilizando el comando `ps aux`, obtenga los 10 procesos que
 mas memoria utilizan y los guarde en un archivo `memory.txt`
 
-## 7 - Printer
+## 7 - Background Printer
 
-Crear un script que use el script printer.sh del ejercicio 4 en background con prioridad 19 e imprima en consola el id del proceso. Luego de 20 segundos
-cambiar la prioridad a 5 y esperar a que el usuario presione enter para matar el proceso de printer.sh.
+Crear un script que use el script printer.sh del ejercicio 4 en background con
+prioridad 19 e imprima en consola el id del proceso. Luego de 20 segundos
+cambiar la prioridad a 5 y esperar a que el usuario presione enter para matar
+el proceso de printer.sh.
+
+# Extras
 
 ## 8 - Process finder
 
@@ -47,4 +51,3 @@ Crear un script que busque procesos por nombre y lo mate.
 ## 10 - CPU Alert
 
 Crear un script que alerte si el uso de la CPU supera el 80% utilizando `top`.
-
