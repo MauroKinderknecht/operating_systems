@@ -8,4 +8,3 @@ interprocesos:
 - The readers and writers problem
 - The sleeping barber problem
 - The producer/consumer problem (A.K.A Bound-Buffer problem)
-- The Bridge and Torch Problem
