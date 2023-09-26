@@ -4,7 +4,7 @@ import time
 import random
 
 def main(n):
-    forks = [threading.Semaphore(1) for _ in range(n + 1)]
+    forks = [threading.Semaphore(1) for _ in range(n)]
     for i in range(n):
         threading.Thread(target=philosopher, args=(i, forks)).start()
 
