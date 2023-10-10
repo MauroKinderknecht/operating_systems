@@ -110,7 +110,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ $a -eq 5 ] && [ $b -eq 10 ]
+    if [[ $a -eq 5 && $b -eq 10 ]]
     then
         echo "Both conditions are true"
     fi
@@ -121,7 +121,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ $a -eq 5 ] || [ $b -eq 15 ]
+    if [[ $a -eq 5 || $b -eq 15 ]]
     then
         echo "At least one condition is true"
     fi
@@ -132,7 +132,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ ! $a -eq 10 ]
+    if [[ ! $a -eq 10 ]]
     then
         echo "a is not 10"
     fi
@@ -145,7 +145,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ $a -eq $b ]
+    if [[ $a -eq $b ]]
     then
         echo "a is equal to b"
     fi
@@ -156,7 +156,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ $a -ne $b ]
+    if [[ $a -ne $b ]]
     then
         echo "a is not equal to b"
     fi
@@ -167,7 +167,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ $a -gt $b ]
+    if [[ $a -gt $b ]]
     then
         echo "a is greater than b"
     fi
@@ -178,7 +178,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ $a -lt $b ]
+    if [[ $a -lt $b ]]
     then
         echo "a is less than b"
     fi
@@ -189,7 +189,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ $a -ge $b ]
+    if [[ $a -ge $b ]]
     then
         echo "a is greater than or equal to b"
     fi
@@ -200,7 +200,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ $a -le $b ]
+    if [[ $a -le $b ]]
     then
         echo "a is less than or equal to b"
     fi
@@ -213,7 +213,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ "$str1" = "$str2" ]
+    if [[ "$str1" = "$str2" ]]
     then
         echo "str1 is equal to str2"
     fi
@@ -224,7 +224,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ "$str1" != "$str2" ]
+    if [[ "$str1" != "$str2" ]]
     then
         echo "str1 is not equal to str2"
     fi
@@ -235,7 +235,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ -z "$str" ]
+    if [[ -z "$str" ]]
     then
         echo "str is null"
     fi
@@ -246,7 +246,7 @@ echo "The PID of the last background command is: $!"
     ```bash
     #!/bin/bash
 
-    if [ -n "$str" ]
+    if [[ -n "$str" ]]
     then
         echo "str is not null"
     fi
@@ -261,7 +261,7 @@ There are many file test operators in Bash, but here are a few common ones:
     ```bash
     #!/bin/bash
 
-    if [ -e "filename" ]
+    if [[ -e "filename" ]]
     then
         echo "File exists"
     fi
@@ -272,7 +272,7 @@ There are many file test operators in Bash, but here are a few common ones:
     ```bash
     #!/bin/bash
 
-    if [ -d "dirname" ]
+    if [[ -d "dirname" ]]
     then
         echo "It's a directory"
     fi
@@ -283,7 +283,7 @@ There are many file test operators in Bash, but here are a few common ones:
     ```bash
     #!/bin/bash
 
-    if [ -r "filename" ]
+    if [[ -r "filename" ]]
     then
         echo "File is readable"
     fi
@@ -337,7 +337,7 @@ test condition is true.
 #!/bin/bash
 
 count=1
-while [ $count -le 5 ]
+while [[ $count -le 5 ]]
 do
     echo "Iteration $count"
     ((count++))
@@ -353,7 +353,7 @@ whether a test condition is true or false.
 #!/bin/bash
 
 number=5
-if [ $number -eq 5 ]
+if [[ $number -eq 5 ]]
 then
     echo "Number is 5"
 fi
@@ -365,7 +365,7 @@ The if-else statement can be used to execute one block of commands if a test con
 #!/bin/bash
 
 number=6
-if [ $number -eq 5 ]
+if [[ $number -eq 5 ]]
 then
     echo "Number is 5"
 else
@@ -461,3 +461,130 @@ when used in loops to process file content line by line.
     read -a numbers
     echo "First number: ${numbers[0]}"
     ```
+
+## Functions
+
+Functions in Bash are blocks of code that are defined in a script to be reused 
+and executed when called from various parts of a script. They help make 
+scripts more modular and easier to maintain.
+
+### Defining a Function
+
+```bash
+#!/bin/bash
+
+function greet {
+    echo "Hello, $1!"
+}
+
+# Alternatively
+greet() {
+    echo "Hello, $1!"
+}
+```
+
+### Calling a Function
+
+```bash
+#!/bin/bash
+
+greet "World"  # Outputs: Hello, World!
+```
+
+### Returning Values
+
+In Bash, functions don't return values like they do in other languages. 
+Instead, you can echo the result and capture it when the function is 
+called, or you can use the `return` statement to return a status code.
+
+```bash
+#!/bin/bash
+
+function add {
+    echo $(($1 + $2))
+}
+
+sum=$(add 5 3)
+echo "The sum is: $sum"
+```
+
+### Using Functions in Pipelines
+
+Functions can be used within pipelines just like commands.
+
+```bash
+#!/bin/bash
+
+function uppercase {
+    tr 'a-z' 'A-Z'
+}
+
+echo "this is a test" | uppercase  # Outputs: THIS IS A TEST
+```
+
+## Command Substitution
+
+Command substitution allows you to use the output of a command as an argument 
+or variable value in your script.
+
+```bash
+#!/bin/bash
+
+current_date=$(date)
+echo "Today's date is: $current_date"
+```
+
+### Nested Command Substitution
+
+Command substitution can be nested, meaning you can use the output of a command as part of another command substitution.
+
+```bash
+#!/bin/bash
+
+echo "We are in $(pwd) and the date is $(date +"%Y-%m-%d")"
+```
+
+## Command Grouping
+
+Command grouping allows you to execute multiple commands together, either in a
+subshell `()` or the current shell `{}`.
+
+```bash
+#!/bin/bash
+
+# Using a subshell
+(current_date=$(date); echo "Today's date is: $current_date")
+
+# Using the current shell
+{ current_date=$(date); echo "Today's date is: $current_date"; }
+```
+
+## Arithmetic Expansion
+
+Arithmetic expansion allows you to perform arithmetic operations and use the 
+result in your script.
+
+```bash
+#!/bin/bash
+
+a=5
+b=3
+sum=$((a + b))
+
+echo "The sum of $a and $b is: $sum"
+```
+
+### Advanced Arithmetic Operations
+
+```bash
+#!/bin/bash
+
+a=5
+b=3
+
+echo "a + b = $((a + b))"
+echo "a - b = $((a - b))"
+echo "a * b = $((a * b))"
+echo "a / b = $((a / b))"
+echo "a % b = $((a % b))"
+```
