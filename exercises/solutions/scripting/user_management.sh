@@ -5,15 +5,23 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
+check_username() {
+    if [ -z "$username" ]; then
+        echo "Error: Username not specified."
+        exit 1
+    fi
+}
+
 while [ $# -gt 0 ]; do
     case "$1" in
-        --add-user)
-            if [ "$EUID" -ne 0 ]; then
-                echo "Error: Permission denied. You must run this script as root."
-                exit 1
-            fi
+        --user)
             shift
             username="$1"
+            shift
+            ;;
+        --add-user)
+            shift
+            check_username
             if id "$username" &>/dev/null; then
                 echo "User '$username' already exists."
             else
@@ -22,14 +30,9 @@ while [ $# -gt 0 ]; do
             fi
             shift
             ;;
-
         --delete-user)
-            if [ "$EUID" -ne 0 ]; then
-                echo "Error: Permission denied. You must run this script as root."
-                exit 1
-            fi
             shift
-            username="$1"
+            check_username
             if id "$username" &>/dev/null; then
                 userdel -r "$username"
                 echo "User '$username' has been deleted."
@@ -38,10 +41,7 @@ while [ $# -gt 0 ]; do
             fi
             shift
             ;;
-
         --add-to-group)
-            shift
-            username="$1"
             shift
             groupname="$1"
             if id "$username" &>/dev/null; then
@@ -56,10 +56,7 @@ while [ $# -gt 0 ]; do
             fi
             shift
             ;;
-
         --remove-from-group)
-            shift
-            username="$1"
             shift
             groupname="$1"
             if id "$username" &>/dev/null; then
@@ -74,10 +71,8 @@ while [ $# -gt 0 ]; do
             fi
             shift
             ;;
-
         --change-password)
             shift
-            username="$1"
             if id "$username" &>/dev/null; then
                 read -s -p "Enter new password for user '$username': " new_password
                 echo
@@ -86,9 +81,7 @@ while [ $# -gt 0 ]; do
             else
                 echo "User '$username' does not exist."
             fi
-            shift
             ;;
-
         --from-file)
             shift
             file="$1"
@@ -117,7 +110,6 @@ while [ $# -gt 0 ]; do
             fi
             shift
             ;;
-
         *)
             echo "Invalid option: $1"
             exit 1
