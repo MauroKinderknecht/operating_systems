@@ -7,48 +7,114 @@ fi
 
 while [ $# -gt 0 ]; do
     case "$1" in
-        --user)
-            shift
-            username="$1"
-            echo "user $username"
-            shift
-            ;;
-
         --add-user)
+            if [ "$EUID" -ne 0 ]; then
+                echo "Error: Permission denied. You must run this script as root."
+                exit 1
+            fi
             shift
             username="$1"
-            echo "create $username"
+            if id "$username" &>/dev/null; then
+                echo "User '$username' already exists."
+            else
+                useradd -m "$username"
+                echo "User '$username' has been added."
+            fi
             shift
             ;;
 
         --delete-user)
+            if [ "$EUID" -ne 0 ]; then
+                echo "Error: Permission denied. You must run this script as root."
+                exit 1
+            fi
             shift
-            echo "delete $username"
+            username="$1"
+            if id "$username" &>/dev/null; then
+                userdel -r "$username"
+                echo "User '$username' has been deleted."
+            else
+                echo "User '$username' does not exist."
+            fi
+            shift
             ;;
 
         --add-to-group)
             shift
-            group="$1"
-            echo "add $username to $group"
+            username="$1"
+            shift
+            groupname="$1"
+            if id "$username" &>/dev/null; then
+                if grep -q "$groupname" /etc/group; then
+                    usermod -aG "$groupname" "$username"
+                    echo "User '$username' has been added to group '$groupname'."
+                else
+                    echo "Group '$groupname' does not exist."
+                fi
+            else
+                echo "User '$username' does not exist."
+            fi
             shift
             ;;
 
         --remove-from-group)
             shift
-            group="$1"
-            echo "remove $username from $group"
+            username="$1"
+            shift
+            groupname="$1"
+            if id "$username" &>/dev/null; then
+                if grep -q "$groupname" /etc/group; then
+                    gpasswd -d "$username" "$groupname"
+                    echo "User '$username' has been removed from group '$groupname'."
+                else
+                    echo "Group '$groupname' does not exist."
+                fi
+            else
+                echo "User '$username' does not exist."
+            fi
             shift
             ;;
 
         --change-password)
             shift
-            echo "change password for $username"
+            username="$1"
+            if id "$username" &>/dev/null; then
+                read -s -p "Enter new password for user '$username': " new_password
+                echo
+                echo "$username:$new_password" | chpasswd
+                echo "Password for user '$username' has been changed."
+            else
+                echo "User '$username' does not exist."
+            fi
+            shift
             ;;
 
         --from-file)
             shift
             file="$1"
-            echo "from file $file"
+            if [ -f "$file" ]; then
+                while IFS=';' read -r action username groupname; do
+                    case "$action" in
+                        add-to-group)
+                            ./user_management.sh --add-to-group "$username" "$groupname"
+                            ;;
+                        remove-from-group)
+                            ./user_management.sh --remove-from-group "$username" "$groupname"
+                            ;;
+                        change-password)
+                            ./user_management.sh --change-password "$username"
+                            ;;
+                        delete-user)
+                            ./user_management.sh --delete-user "$username"
+                            ;;
+                        *)
+                            echo "Invalid action '$action' in file."
+                            ;;
+                    esac
+                done < "$file"
+            else
+                echo "Error: File '$file' does not exist."
+            fi
             shift
             ;;
 
