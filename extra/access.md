@@ -1,4 +1,3 @@
-```
 # Access Management in Linux
 
 ## Overview
