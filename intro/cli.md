@@ -159,6 +159,14 @@ $ cat hello.txt
 
 This command prints the contents of the `hello.txt` file in the console.
 
+#### pwd Command
+
+The `pwd` command in Bash stands for "print working directory." It displays the current working directory path, which is the directory in which your shell is currently operating. This command is commonly used to confirm your present location within the filesystem.
+
+```
+$ pwd
+```
+
 ### Redirection operator
 
 You can use redirection operators `>` to write the output of a command into a 
@@ -195,3 +203,33 @@ $ grep "fun[a-zA-Z]*" intro/assets/grep.txt
 The first command searches for the unix word, the second one searches for the
 same word but case-unsensitive and the last one searches for any word that
 starts with fun.
+
+## Terminal Text Editors
+
+Terminal text editors are text editors that run within the terminal or command-line interface. They are essential tools for system administrators, developers, and anyone working within a Unix-like environment. Some of the most commonly used terminal text editors include `nano`, `vim`, and `emacs`.
+
+### Nano
+
+Nano is a simple, user-friendly text editor that is easy to learn and use. It provides basic text editing capabilities and is ideal for beginners.
+
+#### Basic Commands
+
+- `nano filename`: Open or create a file with the specified name.
+- `Ctrl + O`: Save the file (write out).
+- `Ctrl + X`: Exit nano.
+- `Ctrl + K`: Cut the current line.
+- `Ctrl + U`: Paste the cut line.
+
+### Vim
+
+Vim (Vi IMproved) is a powerful and highly configurable text editor that is an enhanced version of the older vi editor. It has a steeper learning curve but offers extensive features for advanced text editing.
+
+#### Basic Commands
+
+- `vim filename`: Open or create a file with the specified name.
+-	`i`: Switch to Insert mode (for inserting text).
+-	`Esc`: Switch back to Normal mode.
+-	`:w` Save the file (write).
+-	`:q` Quit vim.
+-	`:wq` Save and quit.
+-	`:q!` Quit without saving.

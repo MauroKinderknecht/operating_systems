@@ -184,7 +184,8 @@ echo "The PID of the last background command is: $!"
     fi
     ```
 
-5. **Greater Than or Equal (`-ge`)**: True if the first integer is greater than or equal to the second.
+5. **Greater Than or Equal (`-ge`)**: True if the first integer is greater than
+or equal to the second.
 
     ```bash
     #!/bin/bash
@@ -195,7 +196,8 @@ echo "The PID of the last background command is: $!"
     fi
     ```
 
-6. **Less Than or Equal (`-le`)**: True if the first integer is less than or equal to the second.
+6. **Less Than or Equal (`-le`)**: True if the first integer is less than or 
+equal to the second.
 
     ```bash
     #!/bin/bash
@@ -288,6 +290,32 @@ There are many file test operators in Bash, but here are a few common ones:
         echo "File is readable"
     fi
     ```
+### Case Statement
+
+The case statement in Bash is used to match a value against multiple patterns 
+and execute a block of code corresponding to the first matching pattern. It’s
+similar to switch statements in other programming languages.
+
+```bash
+#!/bin/bash
+
+read -p "Enter a number between 1 and 3: " number
+
+case $number in
+    1)
+        echo "You entered one."
+        ;;
+    2)
+        echo "You entered two."
+        ;;
+    3)
+        echo "You entered three."
+        ;;
+    *)
+        echo "You entered a number outside the range."
+        ;;
+esac
+```
 
 ## For loop
 
@@ -344,6 +372,11 @@ do
 done
 ```
 
+## Until loop
+
+The until loop in Bash is used to execute a block of commands repeatedly as 
+long as a test condition is false. It’s the opposite of the while loop.
+
 ## If conditional
 
 The if statement in Bash is used to execute a block of commands based o
@@ -359,7 +392,8 @@ then
 fi
 ```
 
-The if-else statement can be used to execute one block of commands if a test condition is true and another block if it's false.
+The if-else statement can be used to execute one block of commands if a test 
+condition is true and another block if it's false.
 
 ```bash
 #!/bin/bash
@@ -536,7 +570,8 @@ echo "Today's date is: $current_date"
 
 ### Nested Command Substitution
 
-Command substitution can be nested, meaning you can use the output of a command as part of another command substitution.
+Command substitution can be nested, meaning you can use the output of a command
+as part of another command substitution.
 
 ```bash
 #!/bin/bash
@@ -587,4 +622,17 @@ echo "a - b = $((a - b))"
 echo "a * b = $((a * b))"
 echo "a / b = $((a / b))"
 echo "a % b = $((a % b))"
+```
+
+## Time command
+
+The time command in Bash is used to measure the duration of execution of a 
+command or script. It provides information about the real time, user time, and
+system time taken by the command.
+
+```bash
+#!/bin/bash
+
+# Measure the time taken to execute the sleep command
+time sleep 3
 ```
