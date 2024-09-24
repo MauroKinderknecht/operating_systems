@@ -1,0 +1,10 @@
+- Crea un script que reciba como argumento un nombre de usuario y muestre todos los procesos que están siendo ejecutados por ese usuario
+- Crea un script que muestre todos los procesos que están utilizando más del 20% de CPU
+- Crea un script que ejecute un monitoreo en tiempo real de los procesos que más memoria consumen (usando ps aux y sort), actualizando los resultados cada 5 segundos.
+- Crea un script que reciba un tamaño mínimo en bytes como argumento y liste todos los archivos dentro de un directorio que sean mayores a ese tamaño
+- Crea un script que reciba como argumento el nombre de un proceso y muestre qué usuario es el dueño
+- Crea un script que busque symlinks rotos en un directorio y los elimine automáticamente
+- Crea un script que cuente cuántos procesos está ejecutando cada usuario en el sistema y muestre el resultado en pantalla
+- Crea un script que verifique cada 5 segundos el tamaño de archivos en un directorio e imprima una alerta si supera 10MB
+- Crea un script que monitoree si un proceso específico se detiene (basado en su PID o nombre) y lo reinicie automáticamente si esto ocurre
+- Crea un script que clasifique los archivos de un directorio en categorías de tamaño (por ejemplo, menos de 1MB, entre 1MB y 10MB, más de 10MB) y los liste agrupados en esas categorías.
